@@ -1,0 +1,28 @@
+version: "3.7"
+services: 
+  mysql:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: mysql
+    restart: always
+    port:
+    - 23306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_DATABASE: "baseuno"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: ""
+    volumes:
+      - -/shemas:/var/lib/mysql:rw
+    networks:
+      mysql_network:
+        aliases:
+          - mysql_host
+volumes:
+  shemas: {}
+networks:
+  mysql_network:
+  name: mysql_net
+  driver: bridge
+

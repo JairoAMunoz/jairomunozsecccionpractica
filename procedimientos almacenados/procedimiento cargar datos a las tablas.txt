@@ -1,0 +1,28 @@
+/*******************
+procedimiento alamcenado para cargar datos a las tablas
+eliminar 20 registros de la tabla1 y copiar 50 registros tabla2
+
+*************************/
+
+
+DELIMITER $$
+CREATE PROCEDURE datos666(nombrea varchar(20), cedulaa int(11)) 
+BEGIN 
+DECLARE contador INT;
+SET contador = 1;
+WHILE contador <= 100 DO
+INSERT INTO tabla1(nombre, cedula) VALUES (nombrea, cedulaa+contador);
+if contador>=50 THEN
+INSERT INTO tabla2(nombre, cedula) VALUES (nombrea, cedulaa+contador);
+END IF;
+SET contador = contador + 1;
+ END WHILE;
+SET contador = 1;
+WHILE contador <= 20 DO
+DELETE FROM tabla1 WHERE tabla1.id = contador;
+SET contador = contador + 1;
+ END WHILE;
+
+END$$ 
+DELIMITER ; 
+CALL datos666('Alemania',444);
